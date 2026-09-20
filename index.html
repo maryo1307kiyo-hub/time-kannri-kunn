@@ -98,6 +98,89 @@ body.reordering .sidebar{overflow:hidden;}
   font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--muted);
 }
 .p-group:first-child{margin-top:0;}
+.p-group.is-warn::before{background:#c92a2a;}
+.p-group.is-warn{color:var(--accent);}
+.p-empty{font-size:11px;color:#bbb;padding:8px 4px;}
+.p-gap{
+  display:flex;align-items:center;gap:7px;
+  background:#f0f0f0;border:1px dashed #cfcfcf;border-radius:5px;
+  padding:6px 9px;margin:1px 0 1px 14px;
+}
+.p-gap.filled{background:#e7e8ea;border-style:solid;border-color:#c9cbcf;}
+.pg-bar{width:3px;align-self:stretch;border-radius:2px;background:#c4c4c4;flex-shrink:0;}
+.p-gap.filled .pg-bar{background:var(--co);}
+.pg-label{font-size:9px;font-weight:700;color:#888;letter-spacing:.06em;flex-shrink:0;}
+.pg-name{flex:1;min-width:0;font-size:12px;font-weight:600;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pg-none{color:#b0b0b0;font-weight:400;}
+.pg-dur{display:flex;align-items:center;gap:2px;flex-shrink:0;}
+.pg-inp{
+  width:46px!important;font-size:11px!important;padding:3px 4px!important;text-align:center;
+  border:1px solid #c8c8c8;border-radius:4px;background:#fff;
+}
+.p-item.is-orphan{border-style:dashed;background:#fff8f8;}
+.pg-here,.gap-here{
+  background:var(--accent);color:#fff;border:none;border-radius:4px;
+  padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;
+  font-family:inherit;flex-shrink:0;
+}
+.pg-here:hover,.gap-here:hover{background:#8a0013;}
+@media (max-width:820px){ .pg-here,.gap-here{padding:7px 11px;font-size:12px;} }
+
+/* 並べ替えボタン */
+.btn-move.mv-ins.act,.btn-move.gmv-ins.act{background:var(--accent);color:#fff;border-color:var(--accent);}
+.tl-ord{display:flex;gap:3px;margin-left:auto;flex-shrink:0;}
+.tl-ob{
+  width:24px;height:22px;border:none;border-radius:4px;cursor:pointer;
+  background:rgba(255,255,255,.2);color:#fff;font-size:10px;line-height:1;padding:0;
+}
+.tl-ob:hover{background:rgba(255,255,255,.35);}
+.tl-ob:disabled{opacity:.25;cursor:default;}
+.tl-ob.act{background:#fff;color:var(--accent);}
+.tl-co .tl-ob{background:rgba(0,0,0,.12);color:#fff;}
+.tl-co .tl-ob:hover{background:rgba(0,0,0,.24);}
+
+/* 挿入スロット */
+.ins-slot{
+  margin:3px 0;padding:7px 8px;border:1px dashed var(--accent);border-radius:5px;
+  background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:700;
+  text-align:center;cursor:pointer;
+}
+.ins-slot:hover{background:#ffe0e4;}
+.tl-slot{
+  position:absolute;left:0;right:0;height:11px;cursor:pointer;z-index:8;
+  display:flex;align-items:center;justify-content:center;
+}
+.tl-slot::before{content:'';position:absolute;left:0;right:0;height:2px;background:var(--accent);}
+.tl-slot span{
+  position:relative;background:var(--accent);color:#fff;font-size:9px;font-weight:700;
+  padding:2px 9px;border-radius:9px;white-space:nowrap;
+}
+.tl-slot:hover span{background:#8a0013;}
+
+/* 移動中バナー */
+.move-bar{
+  display:flex;align-items:center;gap:9px;background:var(--accent-bg);
+  border:1px solid #f0c4ca;border-radius:6px;padding:8px 11px;margin-bottom:10px;
+  font-size:12px;color:var(--accent);
+}
+.move-bar span{flex:1;min-width:0;}
+.btn-cancel{
+  background:#fff;border:1px solid #f0c4ca;color:var(--accent);border-radius:4px;
+  padding:5px 11px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;
+}
+@media (max-width:820px){
+  .tl-ob{width:30px;height:28px;font-size:12px;}
+  .ins-slot{padding:11px 8px;font-size:13px;}
+  .tl-slot{height:16px;}
+  .tl-slot span{font-size:11px;padding:3px 11px;}
+  .move-bar{font-size:13px;}
+}
+@media (max-width:820px){
+  .p-gap{margin-left:0;padding:9px 10px;}
+  .pg-name{font-size:13px;}
+  .pg-inp{width:58px!important;font-size:16px!important;padding:7px 4px!important;}
+  .pg-label{font-size:11px;}
+}
 .p-group::before{content:'';width:8px;height:8px;border-radius:2px;background:var(--accent);flex-shrink:0;}
 .p-group.is-all::before{background:#1e6e3a;}
 .p-group .pg-n{margin-left:auto;font-weight:400;color:#bbb;}
@@ -392,7 +475,7 @@ input[type=range]{accent-color:var(--accent);}
 }
 @media print{
   body{height:auto;overflow:visible;background:#fff;}
-  .sidebar,.hdr-btns,.save-st,.modal-bg,.drop-zone,.toast,.tl-resize,.day-tabs,.mobile-tabs{display:none!important;}
+  .sidebar,.hdr-btns,.save-st,.modal-bg,.drop-zone,.toast,.tl-resize,.day-tabs,.mobile-tabs,.tl-ord{display:none!important;}
   .app-header{background:#fff;color:#000;border-bottom:2px solid #000;padding:0 0 8px;}
   .app-body{display:block;overflow:visible;}
   .main{overflow:visible;padding:12px 0;}
@@ -543,6 +626,7 @@ input[type=range]{accent-color:var(--accent);}
       <div class="tl-title">タイムライン</div>
       <div style="font-size:11px;color:var(--muted)">ブロック下端ドラッグで尺調整 / 左リストでドラッグ並び替え</div>
     </div>
+    <div id="moveBanner"></div>
     <div class="day-tabs" id="dayTabs"></div>
     <div id="ovWarn" class="ov-warn" style="display:none">合計が開催時間を超えています</div>
     <div class="tl-wrap">
@@ -595,6 +679,7 @@ function migrate(data) {
     if (p.type === undefined) p.type = 'main';
     if (p.flexible === undefined) p.flexible = false;
     if (p.allDays === undefined) p.allDays = false;
+    if (p.slot === undefined) p.slot = null;   // 転換：何番目の枠に入るか
   });
   (data.days || []).forEach(d => { if (d.customLabel === undefined) d.customLabel = false; });
   if (data.defaultMainMin === undefined) data.defaultMainMin = 20;
@@ -992,16 +1077,29 @@ function computeDay(dayIdx) {
   const gapCount = Math.max(0, n - 1);
 
   // 各転換枠の長さ（転換パフォーマーが入っていればその尺、なければ既定の転換時間）
+  // 転換の人を枠に割り当てる（slot 指定が最優先、残りは空いている枠へ順に）
+  const slots = new Array(gapCount).fill(null);
+  const pending = [];
+  coActs.forEach(a => {
+    const sl = a.slot;
+    if (sl !== null && sl !== undefined && sl >= 0 && sl < gapCount && !slots[sl]) slots[sl] = a;
+    else pending.push(a);
+  });
+  pending.forEach(a => {
+    const f = slots.findIndex(x => !x);
+    if (f >= 0) slots[f] = a;
+  });
+
   const gaps = [];
   for (let i = 0; i < gapCount; i++) {
-    const act = coActs[i] || null;
+    const act = slots[i];
     const afterId = `${dayIdx}:${main[i].id}`;         // 日程 + 直前の演者
     const custom = sched.gapDur
       ? (sched.gapDur[afterId] !== undefined ? sched.gapDur[afterId] : sched.gapDur[main[i].id])
       : undefined;
     const dur = act && act.duration !== null ? act.duration
               : (custom !== undefined ? custom : sched.changeoverMinutes);
-    gaps.push({ act, duration: dur, afterId, custom: custom !== undefined });
+    gaps.push({ act, duration: dur, afterId, custom: custom !== undefined, slotIndex: i });
   }
   const coTotal = gaps.reduce((s,g) => s+g.duration, 0);
   const available = totalMin - coTotal;
@@ -1018,13 +1116,14 @@ function computeDay(dayIdx) {
     if (i < gapCount) {
       const g = gaps[i];
       items.push({
-        kind: 'gap', act: g.act, afterId: g.afterId, custom: g.custom,
+        kind: 'gap', act: g.act, afterId: g.afterId, custom: g.custom, slotIndex: g.slotIndex,
         effectiveDuration: g.duration, startMin: cur, endMin: cur + g.duration
       });
       cur += g.duration;
     }
   });
-  const unusedCo = Math.max(0, coActs.length - gapCount);
+  const placed = slots.filter(Boolean).length;
+  const unusedCo = Math.max(0, coActs.length - placed);
   const totalUsed = cur - toMin(day.startTime);
   return { items, main, coActs, gaps, totalMin, available, coTotal, fixedTotal,
            autoCount, autoMin, totalUsed, unusedCo, overflow: totalUsed > totalMin };
@@ -1032,7 +1131,6 @@ function computeDay(dayIdx) {
 
 // ─── RENDER ───
 function render() {
-  sortPerformersByDay();
   document.getElementById('evName').value = sched.eventName || '';
   document.getElementById('coMin').value = sched.changeoverMinutes;
   document.getElementById('mainMin').value = sched.defaultMainMin;
@@ -1148,105 +1246,199 @@ function render() {
   const pl = document.getElementById('pList');
   pl.innerHTML = '';
 
-  // 色はグローバルインデックスで割り当て
-  let lastKey = null;
-  sched.performers.forEach((p, gi) => {
-    // 日程が変わったら見出しを挟む
-    const k = p.allDays ? 'all' : (p.day ?? 0);
-    if (k !== lastKey) {
-      lastKey = k;
-      const hd = document.createElement('div');
-      hd.className = 'p-group' + (k === 'all' ? ' is-all' : '');
-      const cnt = sched.performers.filter(x => (x.allDays ? 'all' : (x.day ?? 0)) === k).length;
-      const label = k === 'all'
-        ? (sched.days.length === 2 ? '両日とも出演' : '全日程に出演')
-        : `${sched.days[k]?.label || ''}${sched.days[k]?.date ? `（${dateShort(sched.days[k].date)}）` : ''}`;
-      hd.innerHTML = `<span>${label}</span><span class="pg-n">${cnt}組</span>`;
-      pl.appendChild(hd);
+  // タイムラインと同じ並びで、日程ごとに描画する
+  sched.days.forEach((day, di) => {
+    const c = computeDay(di);
+
+    // 日程の見出し
+    const hd = document.createElement('div');
+    hd.className = 'p-group';
+    const nMain = c ? c.main.length : 0;
+    hd.innerHTML = `<span>${day.label}${day.date ? `（${dateShort(day.date)}）` : ''}</span>`
+                 + `<span class="pg-n">${nMain}組${c && c.coActs.length ? ` / 転換${c.coActs.length}` : ''}</span>`;
+    pl.appendChild(hd);
+
+    if (!c || !c.items.length) {
+      const em = document.createElement('div');
+      em.className = 'p-empty';
+      em.textContent = 'この日の出演者はまだいません';
+      pl.appendChild(em);
+      return;
     }
-    const div = document.createElement('div');
-    div.className = 'p-item';
-    div.dataset.gi = gi;
-    div.dataset.id = p.id;
-    div.style.borderLeftColor = p.type==='changeover' ? CO_COLOR : PERF_COLOR;
-    if (p.allDays) div.style.borderLeftWidth = '6px';
-    div.innerHTML = `
-      <div class="p-top">
-        <span class="p-grip">⠿</span>
-        <span class="p-name-wrap">
-          <span class="p-name" title="${p.name}">${p.name}</span>
-          ${p.note ? `<div class="p-note" title="${p.note}">${p.note}</div>` : ''}
-        </span>
-        <span class="p-move">
-          <button class="btn-move mv-up" title="${p.type==='changeover'?'転換の順番を上へ':'出演順を上へ'}"${laneNeighbor(gi,-1)<0?' disabled':''}>▲</button>
-          <button class="btn-move mv-dn" title="${p.type==='changeover'?'転換の順番を下へ':'出演順を下へ'}"${laneNeighbor(gi,1)<0?' disabled':''}>▼</button>
-        </span>
-        <button class="p-del" title="削除">×</button>
-      </div>
-      <div class="p-chips">
-        <span class="chip chip-type ${p.type==='changeover'?'on':'off'}" title="クリックで本編／転換を切替">${p.type==='changeover'?'転換':'本編'}</span>
-        <span class="chip chip-all ${p.allDays?'on':'off'}" title="${p.allDays?'全日程に出演中（クリックで解除）':'クリックで全日程に出演'}">${sched.days.length===2?'両日':'全日'}</span>
-        <span class="chip chip-flex ${p.flexible?'on':'off'}" title="${p.flexible?'希望なし：自動配置の対象':'固定：自動配置しない'}">${p.flexible?'希望なし':'固定'}</span>
-      </div>
-      <div class="p-ctrl">
-        <select class="p-day-sel"${p.allDays?' disabled':''}>${
-          p.allDays
-            ? `<option>${sched.days.length===2?'両日とも出演':'全日程に出演'}</option>`
-            : sched.days.map((d,di)=>`<option value="${di}"${(p.day??0)===di?' selected':''}>${d.label}</option>`).join('')
-        }</select>
-        <span class="p-dur-wrap">${p.type === 'changeover'
-          ? `<input class="p-dur" type="number" value="${p.duration !== null ? p.duration : sched.changeoverMinutes}" min="${MIN_DUR}" title="転換の尺"><span class="p-unit">分</span>`
-          : (p.duration !== null
-              ? `<input class="p-dur" type="number" value="${p.duration}" min="${MIN_DUR}"><span class="p-unit">分</span>`
-              : `<span class="p-auto" title="クリックで固定値に変換">AUTO</span>`)}</span>
-      </div>
-    `;
-    div.addEventListener('pointerdown', e => startHold(e, p.id, div));
-    div.querySelector('.chip-all').addEventListener('click', () => {
-      if (sched.days.length < 2) { toast('日程が1日だけのときは使えません'); return; }
-      const t = sched.performers[gi];
-      t.allDays = !t.allDays;
-      if (t.allDays) t.flexible = false;   // 全日程なら自動配置の対象外
-      saveAndRender();
-    });
-    div.querySelector('.chip-flex').addEventListener('click', () => {
-      sched.performers[gi].flexible = !sched.performers[gi].flexible;
-      saveAndRender();
-    });
-    div.querySelector('.chip-type').addEventListener('click', () => {
-      sched.performers[gi].type = sched.performers[gi].type==='changeover' ? 'main' : 'changeover';
-      saveAndRender();
-    });
-    const daySel = div.querySelector('.p-day-sel');
-    daySel.addEventListener('change', () => { sched.performers[gi].day = parseInt(daySel.value); sched.performers[gi].flexible = false; saveAndRender(); });
-    const durInp = div.querySelector('.p-dur');
-    if (durInp) durInp.addEventListener('change', () => {
-      const v = parseInt(durInp.value);
-      let nv = isNaN(v)||v<MIN_DUR ? null : v;
-      if (nv !== null && sched.performers[gi].type === 'changeover' && nv > coCap()) {
-        nv = coCap();
-        toast(`転換の上限は ${nv}分 です（「転換の長さを制限する」を外すと解除できます）`);
+
+    // 移動中の人が、この日のこの種類の列に入れるか
+    const mover = moveMode ? sched.performers.find(x => x.id === moveMode) : null;
+    const laneOK = it => {
+      if (!mover || mover.type === 'changeover') return false;
+      const target = it.kind === 'gap' ? it.act : it;
+      if (!target) return false;
+      if (target.id === mover.id) return false;
+      const tp = sched.performers.find(x => x.id === target.id);
+      return tp && sameLane(mover, tp);
+    };
+    let firstSlotDone = false;
+    let lastLaneId = null;
+
+    c.items.forEach(item => {
+      // 挿入スロット（この列の各要素の前）
+      if (mover && laneOK(item)) {
+        const tid = item.kind === 'gap' ? item.act.id : item.id;
+        if (!firstSlotDone) { pl.appendChild(slotEl(tid, true, '先頭')); firstSlotDone = true; }
+        else pl.appendChild(slotEl(tid, true));
+        lastLaneId = tid;
       }
-      sched.performers[gi].duration = nv;
-      saveAndRender();
+
+      // ── 転換の枠 ──
+      if (item.kind === 'gap') {
+        const g = document.createElement('div');
+        const act = item.act;
+        g.className = 'p-gap' + (act ? ' filled' : '');
+        const agi = act ? sched.performers.findIndex(x => x.id === act.id) : -1;
+        void agi;
+        g.innerHTML = `
+          <span class="pg-bar"></span>
+          <span class="pg-label">転換</span>
+          <span class="pg-name">${act ? act.name : '<span class="pg-none">（出演者なし）</span>'}</span>
+          ${moveMode && moveMode !== (act && act.id) && sched.performers.find(x=>x.id===moveMode)?.type==='changeover'
+            ? `<button class="pg-here gmv-here">＋ ここに入れる</button>` : ''}
+          <span class="p-move">
+            <button class="btn-move gmv-up" title="上の転換枠と入れ替え"${item.slotIndex<=0?' disabled':''}>▲</button>
+            <button class="btn-move gmv-dn" title="下の転換枠と入れ替え"${item.slotIndex>=c.gaps.length-1?' disabled':''}>▼</button>
+            ${act ? `<button class="btn-move gmv-ins ${moveMode===act.id?'act':''}" title="位置を指定して移動">⇱</button>` : ''}
+          </span>
+          <span class="pg-dur">
+            <input class="pg-inp" type="number" min="0" value="${item.effectiveDuration}" title="転換の長さ（分）">
+            <span class="p-unit">分</span>
+          </span>`;
+        const inp = g.querySelector('.pg-inp');
+        inp.addEventListener('change', () => {
+          const v = Math.max(0, parseInt(inp.value) || 0);
+          if (act) {
+            const t = sched.performers[agi];
+            t.duration = coCap() === Infinity ? v : Math.min(v, coCap());
+            saveAndRender();
+          } else {
+            setGapDur(item.afterId, v);
+          }
+        });
+        const gu = g.querySelector('.gmv-up'), gd = g.querySelector('.gmv-dn');
+        if (gu) gu.addEventListener('click', () => swapGap(di, item.slotIndex, item.slotIndex - 1));
+        if (gd) gd.addEventListener('click', () => swapGap(di, item.slotIndex, item.slotIndex + 1));
+        const gins = g.querySelector('.gmv-ins');
+        if (gins) gins.addEventListener('click', () => startMove(act.id));
+        const gslot = g.querySelector('.gmv-here');
+        if (gslot) gslot.addEventListener('click', () => assignToSlot(moveMode, di, item.slotIndex));
+        pl.appendChild(g);
+        if (act) lastLaneId = act.id;
+        return;
+      }
+
+      // ── 出演者カード ──
+      const gi = sched.performers.findIndex(x => x.id === item.id);
+      const p = sched.performers[gi];
+      const div = document.createElement('div');
+      div.className = 'p-item';
+      div.dataset.gi = gi;
+      div.dataset.id = p.id;
+      div.style.borderLeftColor = PERF_COLOR;
+      if (p.allDays) div.style.borderLeftWidth = '6px';
+      div.innerHTML = `
+        <div class="p-top">
+          <span class="p-grip">⠿</span>
+          <span class="p-name-wrap">
+            <span class="p-name" title="${p.name}">${p.name}</span>
+            ${p.note ? `<div class="p-note" title="${p.note}">${p.note}</div>` : ''}
+          </span>
+          <span class="p-move">
+            <button class="btn-move mv-up" title="出演順を上へ"${laneNeighbor(gi,-1)<0?' disabled':''}>▲</button>
+            <button class="btn-move mv-dn" title="出演順を下へ"${laneNeighbor(gi,1)<0?' disabled':''}>▼</button>
+            <button class="btn-move mv-ins ${moveMode===p.id?'act':''}" title="位置を指定して移動">⇱</button>
+          </span>
+          <button class="p-del" title="削除">×</button>
+        </div>
+        <div class="p-chips">
+          <span class="chip chip-type off" title="クリックで転換に切替">本編</span>
+          <span class="chip chip-all ${p.allDays?'on':'off'}" title="${p.allDays?'全日程に出演中（クリックで解除）':'クリックで全日程に出演'}">${sched.days.length===2?'両日':'全日'}</span>
+          <span class="chip chip-flex ${p.flexible?'on':'off'}" title="${p.flexible?'希望なし：自動配置の対象':'固定：自動配置しない'}">${p.flexible?'希望なし':'固定'}</span>
+        </div>
+        <div class="p-ctrl">
+          <select class="p-day-sel"${p.allDays?' disabled':''}>${
+            p.allDays
+              ? `<option>${sched.days.length===2?'両日とも出演':'全日程に出演'}</option>`
+              : sched.days.map((d,dj)=>`<option value="${dj}"${(p.day??0)===dj?' selected':''}>${d.label}</option>`).join('')
+          }</select>
+          <span class="p-dur-wrap">${p.duration !== null
+            ? `<input class="p-dur" type="number" value="${p.duration}" min="${MIN_DUR}"><span class="p-unit">分</span>`
+            : `<span class="p-auto" title="クリックで固定値に変換">AUTO</span>`}</span>
+        </div>
+      `;
+      bindCard(div, p, gi);
+      pl.appendChild(div);
+      if (laneOK(item)) lastLaneId = p.id;
     });
-    const autoBtn = div.querySelector('.p-auto');
-    if (autoBtn) autoBtn.addEventListener('click', () => {
-      const c2 = computeDay(sched.performers[gi].day ?? 0);
-      const item = c2?.items.find(it => it.kind !== 'gap' && it.id === p.id);
-      if (item) sched.performers[gi].duration = item.effectiveDuration;
-      else sched.performers[gi].duration = sched.changeoverMinutes;
-      saveAndRender();
-    });
-    const mvUp = div.querySelector('.mv-up'), mvDn = div.querySelector('.mv-dn');
-    if (mvUp) mvUp.addEventListener('click', () => movePerformer(gi, -1));
-    if (mvDn) mvDn.addEventListener('click', () => movePerformer(gi, 1));
-    div.querySelector('.p-del').addEventListener('click', () => {
-      sched.performers.splice(gi, 1);
-      saveAndRender();
-    });
-    pl.appendChild(div);
+
+    if (mover && lastLaneId) pl.appendChild(slotEl(lastLaneId, false, '最後'));
   });
+
+  // どの日にも属さない転換出演者（枠が足りずに余っている人）
+  const orphan = sched.performers.filter(p => {
+    if (p.type !== 'changeover') return false;
+    const di = p.allDays ? 0 : (p.day ?? 0);
+    const c = computeDay(di);
+    return !c || !c.items.some(it => it.kind === 'gap' && it.act && it.act.id === p.id);
+  });
+  if (orphan.length) {
+    const hd = document.createElement('div');
+    hd.className = 'p-group is-warn';
+    hd.innerHTML = `<span>転換枠に入りきらない</span><span class="pg-n">${orphan.length}組</span>`;
+    pl.appendChild(hd);
+    orphan.forEach(p => {
+      const gi = sched.performers.findIndex(x => x.id === p.id);
+      const div = document.createElement('div');
+      div.className = 'p-item is-orphan';
+      div.dataset.gi = gi; div.dataset.id = p.id;
+      div.style.borderLeftColor = CO_COLOR;
+      div.innerHTML = `
+        <div class="p-top">
+          <span class="p-grip">⠿</span>
+          <span class="p-name-wrap">
+            <span class="p-name">${p.name}</span>
+            <div class="p-note">転換の枠が足りません（本編を増やすか、本編に変更してください）</div>
+          </span>
+          <span class="p-move">
+            <button class="btn-move mv-up" title="上へ"${laneNeighbor(gi,-1)<0?' disabled':''}>▲</button>
+            <button class="btn-move mv-dn" title="下へ"${laneNeighbor(gi,1)<0?' disabled':''}>▼</button>
+          </span>
+          <button class="p-del" title="削除">×</button>
+        </div>
+        <div class="p-chips">
+          <span class="chip chip-type on" title="クリックで本編に切替">転換</span>
+          <span class="chip chip-all ${p.allDays?'on':'off'}">${sched.days.length===2?'両日':'全日'}</span>
+          <span class="chip chip-flex ${p.flexible?'on':'off'}">${p.flexible?'希望なし':'固定'}</span>
+        </div>
+        <div class="p-ctrl">
+          <select class="p-day-sel"${p.allDays?' disabled':''}>${
+            p.allDays ? `<option>${sched.days.length===2?'両日とも出演':'全日程に出演'}</option>`
+            : sched.days.map((d,dj)=>`<option value="${dj}"${(p.day??0)===dj?' selected':''}>${d.label}</option>`).join('')
+          }</select>
+          <span class="p-dur-wrap"><input class="p-dur" type="number" value="${p.duration !== null ? p.duration : sched.changeoverMinutes}" min="${MIN_DUR}"><span class="p-unit">分</span></span>
+        </div>`;
+      bindCard(div, p, gi);
+      pl.appendChild(div);
+    });
+  }
+
+  // 移動モードのバナー
+  const mb = document.getElementById('moveBanner');
+  if (moveMode) {
+    const mv = sched.performers.find(x => x.id === moveMode);
+    mb.innerHTML = mv
+      ? `<div class="move-bar"><span><b>${mv.name}</b> を移動中 — 挟みたい位置の「＋」を押してください</span>
+         <button class="btn-cancel" id="cancelMv">やめる</button></div>`
+      : '';
+    const cb = document.getElementById('cancelMv');
+    if (cb) cb.addEventListener('click', cancelMove);
+  } else mb.innerHTML = '';
 
   // day tabs
   const tabs = document.getElementById('dayTabs');
@@ -1321,15 +1513,29 @@ function renderTimeline(c) {
         co.innerHTML = `
           <span class="co-act">${item.act.name}</span>
           <span class="co-t">${toTime(item.startMin)}〜${toTime(item.endMin)}（${item.effectiveDuration}分）</span>
+          <span class="tl-ord">
+            <button class="tl-ob g-up" title="上の転換枠と入れ替え"${item.slotIndex<=0?' disabled':''}>▲</button>
+            <button class="tl-ob g-dn" title="下の転換枠と入れ替え"${item.slotIndex>=c.gaps.length-1?' disabled':''}>▼</button>
+            <button class="tl-ob t-ins ${moveMode===item.act.id?'act':''}" title="位置を指定して移動">⇱</button>
+          </span>
           <div class="tl-resize co-resize" data-gi="${gi}"></div>`;
+        co.dataset.pid = item.act.id;
+        co.dataset.slot = item.slotIndex;
       } else {
+        const moverIsCo = moveMode && sched.performers.find(x => x.id === moveMode)?.type === 'changeover';
         co.innerHTML = `
           <span>転換</span>
           <input class="gap-inp" type="number" min="0" value="${item.effectiveDuration}" data-after="${item.afterId}" title="この転換の長さ（分）">
           <span>分</span>
           ${item.custom ? `<button class="gap-reset" data-after="${item.afterId}" title="既定（${sched.changeoverMinutes}分）に戻す">戻す</button>` : ''}
+          ${moverIsCo ? `<button class="gap-here">＋ ここに入れる</button>` : ''}
           <span class="co-t">${toTime(item.startMin)}〜${toTime(item.endMin)}</span>
+          <span class="tl-ord">
+            <button class="tl-ob g-up" title="上の転換枠と入れ替え"${item.slotIndex<=0?' disabled':''}>▲</button>
+            <button class="tl-ob g-dn" title="下の転換枠と入れ替え"${item.slotIndex>=c.gaps.length-1?' disabled':''}>▼</button>
+          </span>
           <div class="tl-resize gap-resize" data-after="${item.afterId}"></div>`;
+        co.dataset.slot = item.slotIndex;
       }
       blocks.appendChild(co);
       return;
@@ -1350,11 +1556,78 @@ function renderTimeline(c) {
       <div class="tl-inner">
         <div class="tl-name">${item.name}</div>
         <div class="tl-time">${toTime(item.startMin)}〜${toTime(item.endMin)}（${item.effectiveDuration}分）</div>
+        <span class="tl-ord">
+          <button class="tl-ob t-up" title="出演順を上へ"${laneNeighbor(gi,-1)<0?' disabled':''}>▲</button>
+          <button class="tl-ob t-dn" title="出演順を下へ"${laneNeighbor(gi,1)<0?' disabled':''}>▼</button>
+          <button class="tl-ob t-ins ${moveMode===item.id?'act':''}" title="位置を指定して移動">⇱</button>
+        </span>
       </div>
       <div class="tl-resize" data-gi="${gi}"></div>
     `;
+    blk.dataset.pid = item.id;
     blocks.appendChild(blk);
   });
+
+  // 並べ替えボタン
+  blocks.querySelectorAll('.tl-ob').forEach(btn => {
+    btn.addEventListener('pointerdown', e => e.stopPropagation());
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      // 転換枠の入れ替え
+      if (btn.classList.contains('g-up') || btn.classList.contains('g-dn')) {
+        const host = btn.closest('[data-slot]');
+        if (!host) return;
+        const si = parseInt(host.dataset.slot);
+        swapGap(currentDay, si, si + (btn.classList.contains('g-up') ? -1 : 1));
+        return;
+      }
+      const host = btn.closest('[data-pid]');
+      const pid = host && host.dataset.pid;
+      const gi = sched.performers.findIndex(x => x.id === pid);
+      if (gi < 0) return;
+      if (btn.classList.contains('t-up')) movePerformer(gi, -1);
+      else if (btn.classList.contains('t-dn')) movePerformer(gi, 1);
+      else startMove(pid);
+    });
+  });
+
+  // 空の転換枠へ入れる
+  blocks.querySelectorAll('.gap-here').forEach(btn => {
+    btn.addEventListener('pointerdown', e => e.stopPropagation());
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const host = btn.closest('[data-slot]');
+      if (host) assignToSlot(moveMode, currentDay, parseInt(host.dataset.slot));
+    });
+  });
+
+  // 挿入スロット（移動モード中）
+  if (moveMode && sched.performers.find(x => x.id === moveMode)?.type !== 'changeover') {
+    const mover = sched.performers.find(x => x.id === moveMode);
+    const lane = c.items.filter(it => {
+      const t = it.kind === 'gap' ? it.act : it;
+      if (!t || t.id === moveMode) return false;
+      const tp = sched.performers.find(x => x.id === t.id);
+      return tp && sameLane(mover, tp);
+    });
+    lane.forEach((it, k) => {
+      const t = it.kind === 'gap' ? it.act : it;
+      const mk = document.createElement('div');
+      mk.className = 'tl-slot';
+      mk.style.top = ((it.startMin - startMin) * PPM - 5) + 'px';
+      mk.innerHTML = '<span>＋ ここに挟む</span>';
+      mk.addEventListener('click', () => moveToAnchor(moveMode, t.id, true));
+      blocks.appendChild(mk);
+      if (k === lane.length - 1) {
+        const mk2 = document.createElement('div');
+        mk2.className = 'tl-slot';
+        mk2.style.top = ((it.endMin - startMin) * PPM - 5) + 'px';
+        mk2.innerHTML = '<span>＋ 最後に入れる</span>';
+        mk2.addEventListener('click', () => moveToAnchor(moveMode, t.id, false));
+        blocks.appendChild(mk2);
+      }
+    });
+  }
 
   // 空の転換枠の入力
   blocks.querySelectorAll('.gap-inp').forEach(inp => {
@@ -1441,13 +1714,94 @@ function renderTimeline(c) {
   blocks.addEventListener('touchstart', startDrag, { passive: false });
 }
 
-// ─── 出演者リストを日付順に整列（同じ日の中の順番は保つ）───
-function sortPerformersByDay() {
-  const key = p => p.allDays ? -1 : (p.day ?? 0);
-  sched.performers = sched.performers
-    .map((p, i) => ({ p, i }))
-    .sort((a, b) => (key(a.p) - key(b.p)) || (a.i - b.i))
-    .map(x => x.p);
+// ─── 転換枠の操作（空の枠も対象）───
+// いま各枠に誰が入っているかを確定させる（以後ずれないよう全員に slot を付ける）
+function lockSlots(dayIdx) {
+  const c = computeDay(dayIdx);
+  if (!c) return;
+  c.gaps.forEach((g, i) => {
+    if (g.act) {
+      const t = sched.performers.find(x => x.id === g.act.id);
+      if (t) t.slot = i;
+    }
+  });
+}
+
+// 枠 i と 枠 j の中身を入れ替える（片方が空でも可）
+function swapGap(dayIdx, i, j) {
+  const c = computeDay(dayIdx);
+  if (!c || i < 0 || j < 0 || i >= c.gaps.length || j >= c.gaps.length) return;
+  lockSlots(dayIdx);
+  const a = c.gaps[i].act, b = c.gaps[j].act;
+  if (!a && !b) return;
+  if (a) { const t = sched.performers.find(x => x.id === a.id); if (t) t.slot = j; }
+  if (b) { const t = sched.performers.find(x => x.id === b.id); if (t) t.slot = i; }
+  // 空の枠に設定した長さは位置に紐づくので入れ替える
+  if (sched.gapDur) {
+    const ka = c.gaps[i].afterId, kb = c.gaps[j].afterId;
+    const va = sched.gapDur[ka], vb = sched.gapDur[kb];
+    if (va !== undefined) sched.gapDur[kb] = va; else delete sched.gapDur[kb];
+    if (vb !== undefined) sched.gapDur[ka] = vb; else delete sched.gapDur[ka];
+  }
+  saveAndRender();
+}
+
+// 転換の人を指定の枠へ移す（空の枠に入れる）
+function assignToSlot(actId, dayIdx, slotIndex) {
+  const c = computeDay(dayIdx);
+  if (!c) return;
+  lockSlots(dayIdx);
+  const occupant = c.gaps[slotIndex] ? c.gaps[slotIndex].act : null;
+  const mover = sched.performers.find(x => x.id === actId);
+  if (!mover) return;
+  const from = mover.slot;
+  mover.slot = slotIndex;
+  if (occupant && occupant.id !== actId) {
+    const o = sched.performers.find(x => x.id === occupant.id);
+    if (o) o.slot = (from !== null && from !== undefined) ? from : null;
+  }
+  if (mover.day !== dayIdx && !mover.allDays) mover.day = dayIdx;
+  moveMode = null;
+  saveAndRender();
+}
+
+// ─── 「ここに挟む」挿入モード ───
+let moveMode = null;   // 移動中の出演者ID
+
+function startMove(id) {
+  moveMode = (moveMode === id) ? null : id;
+  render();
+  if (moveMode) toast('挟みたい位置の「＋ ここに挟む」を押してください');
+}
+function cancelMove() { moveMode = null; render(); }
+
+// moved を anchor の前／後ろへ移動
+function moveToAnchor(movedId, anchorId, before) {
+  const arr = sched.performers;
+  const mi = arr.findIndex(p => p.id === movedId);
+  if (mi < 0) return;
+  const [moved] = arr.splice(mi, 1);
+  let ai = arr.findIndex(p => p.id === anchorId);
+  if (ai < 0) { arr.splice(mi, 0, moved); return; }
+  arr.splice(before ? ai : ai + 1, 0, moved);
+  moveMode = null;
+  saveAndRender();
+}
+// 末尾（その日のその種類の最後）へ
+function moveToEnd(movedId, lastId) {
+  moveToAnchor(movedId, lastId, false);
+}
+
+// 挿入バーを作る
+function slotEl(anchorId, before, label) {
+  const el = document.createElement('div');
+  el.className = 'ins-slot';
+  el.innerHTML = `<span>＋ ここに挟む${label ? `（${label}）` : ''}</span>`;
+  el.addEventListener('click', e => {
+    e.stopPropagation();
+    moveToAnchor(moveMode, anchorId, before);
+  });
+  return el;
 }
 
 // ─── 長押しドラッグ並べ替え（指・マウス共通）───
@@ -1502,6 +1856,68 @@ function startHold(e, id, el) {
   document.addEventListener('pointermove', move, { passive: false });
   document.addEventListener('pointerup', up);
   document.addEventListener('pointercancel', up);
+}
+
+// ─── カードの操作をまとめて登録 ───
+function bindCard(div, p, gi) {
+  div.addEventListener('pointerdown', e => startHold(e, p.id, div));
+
+  div.querySelector('.chip-all').addEventListener('click', () => {
+    if (sched.days.length < 2) { toast('日程が1日だけのときは使えません'); return; }
+    const t = sched.performers[gi];
+    t.allDays = !t.allDays;
+    if (t.allDays) t.flexible = false;
+    saveAndRender();
+  });
+  div.querySelector('.chip-flex').addEventListener('click', () => {
+    sched.performers[gi].flexible = !sched.performers[gi].flexible;
+    saveAndRender();
+  });
+  div.querySelector('.chip-type').addEventListener('click', () => {
+    const t = sched.performers[gi];
+    t.type = t.type === 'changeover' ? 'main' : 'changeover';
+    if (t.type === 'changeover' && t.duration === null) t.duration = sched.changeoverMinutes;
+    saveAndRender();
+  });
+
+  const daySel = div.querySelector('.p-day-sel');
+  if (daySel && !daySel.disabled) daySel.addEventListener('change', () => {
+    sched.performers[gi].day = parseInt(daySel.value);
+    sched.performers[gi].flexible = false;
+    saveAndRender();
+  });
+
+  const durInp = div.querySelector('.p-dur');
+  if (durInp) durInp.addEventListener('change', () => {
+    const v = parseInt(durInp.value);
+    let nv = isNaN(v) || v < MIN_DUR ? null : v;
+    if (nv !== null && sched.performers[gi].type === 'changeover' && nv > coCap()) {
+      nv = coCap();
+      toast(`転換の上限は ${nv}分 です`);
+    }
+    sched.performers[gi].duration = nv;
+    saveAndRender();
+  });
+
+  const autoBtn = div.querySelector('.p-auto');
+  if (autoBtn) autoBtn.addEventListener('click', () => {
+    const di = p.allDays ? 0 : (p.day ?? 0);
+    const c2 = computeDay(di);
+    const it = c2 && c2.items.find(x => x.kind !== 'gap' && x.id === p.id);
+    sched.performers[gi].duration = it ? it.effectiveDuration : sched.defaultMainMin;
+    saveAndRender();
+  });
+
+  const up = div.querySelector('.mv-up'), dn = div.querySelector('.mv-dn');
+  if (up) up.addEventListener('click', () => movePerformer(gi, -1));
+  if (dn) dn.addEventListener('click', () => movePerformer(gi, 1));
+  const ins = div.querySelector('.mv-ins');
+  if (ins) ins.addEventListener('click', () => startMove(p.id));
+
+  div.querySelector('.p-del').addEventListener('click', () => {
+    sched.performers.splice(gi, 1);
+    saveAndRender();
+  });
 }
 
 // ─── ACTIONS ───
