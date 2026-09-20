@@ -84,8 +84,24 @@ input:focus,select:focus{border-color:var(--accent);background:#fff;}
   background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--border);
   border-radius:6px;padding:8px 9px;user-select:none;overflow:hidden;
 }
-.p-item.drag-over{border-color:var(--accent)!important;box-shadow:0 0 0 2px var(--accent-bg);}
-.p-item.dragging{opacity:.35;}
+.p-item{transition:transform .12s, box-shadow .12s;touch-action:pan-y;}
+.p-item.dragging{
+  opacity:.95;box-shadow:0 6px 18px rgba(0,0,0,.22);
+  transform:scale(1.02);border-color:var(--accent);position:relative;z-index:5;
+}
+body.reordering{user-select:none;-webkit-user-select:none;}
+body.reordering .p-item{touch-action:none;}
+body.reordering .sidebar{overflow:hidden;}
+.lane-hint{font-size:10px;color:#bbb;margin-left:auto;white-space:nowrap;}
+.p-group{
+  display:flex;align-items:center;gap:7px;margin:9px 0 1px;padding:0 2px;
+  font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--muted);
+}
+.p-group:first-child{margin-top:0;}
+.p-group::before{content:'';width:8px;height:8px;border-radius:2px;background:var(--accent);flex-shrink:0;}
+.p-group.is-all::before{background:#1e6e3a;}
+.p-group .pg-n{margin-left:auto;font-weight:400;color:#bbb;}
+@media (max-width:820px){ .p-group{font-size:12px;margin:14px 0 3px;} }
 
 /* 1段目：名前 */
 .p-top{display:flex;align-items:flex-start;gap:7px;min-width:0;}
@@ -365,10 +381,8 @@ input[type=range]{accent-color:var(--accent);}
 .import-warn{font-size:12px;color:var(--accent);background:var(--accent-bg);padding:6px 10px;border-radius:4px;margin-bottom:8px;}
 
 .hdr-btns{display:flex;gap:5px;flex-shrink:0;}
-.btn-hdr{
-  background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:4px;
-  padding:5px 11px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;
-}
+.btn-hdr{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:4px;
+  padding:5px 11px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;}
 .btn-hdr:hover{background:rgba(255,255,255,.22);}
 .app-header{flex-wrap:wrap;}
 @media (max-width:820px){
@@ -549,7 +563,7 @@ const MIN_DUR = 3;
 
 let db = null;
 let currentDay = 0;
-let dragSrc = null, saveTimer = null;
+let saveTimer = null;
 let importCandidates = [];
 let detectedEvent = null;
 let importMode = 'replace';
@@ -1018,6 +1032,7 @@ function computeDay(dayIdx) {
 
 // ─── RENDER ───
 function render() {
+  sortPerformersByDay();
   document.getElementById('evName').value = sched.eventName || '';
   document.getElementById('coMin').value = sched.changeoverMinutes;
   document.getElementById('mainMin').value = sched.defaultMainMin;
@@ -1134,11 +1149,25 @@ function render() {
   pl.innerHTML = '';
 
   // 色はグローバルインデックスで割り当て
+  let lastKey = null;
   sched.performers.forEach((p, gi) => {
+    // 日程が変わったら見出しを挟む
+    const k = p.allDays ? 'all' : (p.day ?? 0);
+    if (k !== lastKey) {
+      lastKey = k;
+      const hd = document.createElement('div');
+      hd.className = 'p-group' + (k === 'all' ? ' is-all' : '');
+      const cnt = sched.performers.filter(x => (x.allDays ? 'all' : (x.day ?? 0)) === k).length;
+      const label = k === 'all'
+        ? (sched.days.length === 2 ? '両日とも出演' : '全日程に出演')
+        : `${sched.days[k]?.label || ''}${sched.days[k]?.date ? `（${dateShort(sched.days[k].date)}）` : ''}`;
+      hd.innerHTML = `<span>${label}</span><span class="pg-n">${cnt}組</span>`;
+      pl.appendChild(hd);
+    }
     const div = document.createElement('div');
     div.className = 'p-item';
-    div.draggable = true;
     div.dataset.gi = gi;
+    div.dataset.id = p.id;
     div.style.borderLeftColor = p.type==='changeover' ? CO_COLOR : PERF_COLOR;
     if (p.allDays) div.style.borderLeftWidth = '6px';
     div.innerHTML = `
@@ -1149,8 +1178,8 @@ function render() {
           ${p.note ? `<div class="p-note" title="${p.note}">${p.note}</div>` : ''}
         </span>
         <span class="p-move">
-          <button class="btn-move mv-up" title="上へ"${gi===0?' disabled':''}>▲</button>
-          <button class="btn-move mv-dn" title="下へ"${gi===sched.performers.length-1?' disabled':''}>▼</button>
+          <button class="btn-move mv-up" title="${p.type==='changeover'?'転換の順番を上へ':'出演順を上へ'}"${laneNeighbor(gi,-1)<0?' disabled':''}>▲</button>
+          <button class="btn-move mv-dn" title="${p.type==='changeover'?'転換の順番を下へ':'出演順を下へ'}"${laneNeighbor(gi,1)<0?' disabled':''}>▼</button>
         </span>
         <button class="p-del" title="削除">×</button>
       </div>
@@ -1172,20 +1201,7 @@ function render() {
               : `<span class="p-auto" title="クリックで固定値に変換">AUTO</span>`)}</span>
       </div>
     `;
-    div.addEventListener('dragstart', () => { dragSrc = gi; div.classList.add('dragging'); });
-    div.addEventListener('dragend', () => div.classList.remove('dragging'));
-    div.addEventListener('dragover', e => { e.preventDefault(); div.classList.add('drag-over'); });
-    div.addEventListener('dragleave', () => div.classList.remove('drag-over'));
-    div.addEventListener('drop', e => {
-      e.preventDefault(); div.classList.remove('drag-over');
-      if (dragSrc !== null && dragSrc !== gi) {
-        const arr = [...sched.performers];
-        const [moved] = arr.splice(dragSrc, 1);
-        arr.splice(gi, 0, moved);
-        sched.performers = arr;
-        saveAndRender();
-      }
-    });
+    div.addEventListener('pointerdown', e => startHold(e, p.id, div));
     div.querySelector('.chip-all').addEventListener('click', () => {
       if (sched.days.length < 2) { toast('日程が1日だけのときは使えません'); return; }
       const t = sched.performers[gi];
@@ -1425,13 +1441,105 @@ function renderTimeline(c) {
   blocks.addEventListener('touchstart', startDrag, { passive: false });
 }
 
+// ─── 出演者リストを日付順に整列（同じ日の中の順番は保つ）───
+function sortPerformersByDay() {
+  const key = p => p.allDays ? -1 : (p.day ?? 0);
+  sched.performers = sched.performers
+    .map((p, i) => ({ p, i }))
+    .sort((a, b) => (key(a.p) - key(b.p)) || (a.i - b.i))
+    .map(x => x.p);
+}
+
+// ─── 長押しドラッグ並べ替え（指・マウス共通）───
+const HOLD_MS = 320;      // 長押し判定
+const MOVE_TOL = 8;       // これ以上動いたら長押しキャンセル（スクロール優先）
+let hold = null;          // {id, timer, startY, active}
+
+function startHold(e, id, el) {
+  if (e.target.closest('button, select, input, .chip')) return;  // 操作系は除外
+  if (e.pointerType === 'mouse' && e.button !== 0) return;
+  hold = { id, startY: e.clientY, active: false, timer: null };
+  hold.timer = setTimeout(() => {
+    if (!hold) return;
+    hold.active = true;
+    document.body.classList.add('reordering');
+    const cur = document.querySelector(`.p-item[data-id="${id}"]`);
+    if (cur) cur.classList.add('dragging');
+    if (navigator.vibrate) navigator.vibrate(12);
+  }, HOLD_MS);
+
+  const move = ev => {
+    if (!hold) return;
+    if (!hold.active) {
+      // 長押し前に動いたらスクロールとみなして中止
+      if (Math.abs(ev.clientY - hold.startY) > MOVE_TOL) endHold();
+      return;
+    }
+    ev.preventDefault();
+    const over = document.elementFromPoint(ev.clientX, ev.clientY);
+    const card = over && over.closest('.p-item');
+    if (!card || card.dataset.id === hold.id) return;
+    if (reorderTo(hold.id, card.dataset.id)) {
+      render();
+      const cur = document.querySelector(`.p-item[data-id="${hold.id}"]`);
+      if (cur) cur.classList.add('dragging');
+    }
+  };
+  const up = () => {
+    const wasActive = hold && hold.active;
+    endHold();
+    if (wasActive) saveAndRender();
+  };
+  function endHold() {
+    if (hold && hold.timer) clearTimeout(hold.timer);
+    hold = null;
+    document.body.classList.remove('reordering');
+    document.querySelectorAll('.p-item.dragging').forEach(x => x.classList.remove('dragging'));
+    document.removeEventListener('pointermove', move);
+    document.removeEventListener('pointerup', up);
+    document.removeEventListener('pointercancel', up);
+  }
+  document.addEventListener('pointermove', move, { passive: false });
+  document.addEventListener('pointerup', up);
+  document.addEventListener('pointercancel', up);
+}
+
 // ─── ACTIONS ───
-function movePerformer(i, dir) {
-  const j = i + dir;
-  if (j < 0 || j >= sched.performers.length) return;
+// 2人が「同じ列（同じ種類・同じ日）」に属するか
+function sameLane(a, b) {
+  if ((a.type || 'main') !== (b.type || 'main')) return false;
+  if (a.allDays || b.allDays) return true;
+  return (a.day ?? 0) === (b.day ?? 0);
+}
+
+// 同じ列の中での前後を返す
+function laneNeighbor(i, dir) {
   const arr = sched.performers;
-  [arr[i], arr[j]] = [arr[j], arr[i]];
+  for (let j = i + dir; j >= 0 && j < arr.length; j += dir) {
+    if (sameLane(arr[i], arr[j])) return j;
+  }
+  return -1;
+}
+
+function movePerformer(i, dir) {
+  const j = laneNeighbor(i, dir);
+  if (j < 0) return;
+  const arr = sched.performers;
+  const [moved] = arr.splice(i, 1);
+  arr.splice(j, 0, moved);
   saveAndRender();
+}
+
+// ドラッグで i を j の位置へ
+function reorderTo(fromId, toId) {
+  const arr = sched.performers;
+  const i = arr.findIndex(p => p.id === fromId);
+  const j = arr.findIndex(p => p.id === toId);
+  if (i < 0 || j < 0 || i === j) return false;
+  if (!sameLane(arr[i], arr[j])) return false;
+  const [moved] = arr.splice(i, 1);
+  arr.splice(j, 0, moved);
+  return true;
 }
 
 function addPerformer() {
