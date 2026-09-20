@@ -469,7 +469,7 @@ input[type=range]{accent-color:var(--accent);}
 .btn-hdr:hover{background:rgba(255,255,255,.22);}
 .app-header{flex-wrap:wrap;}
 @media (max-width:820px){
-  .btn-hdr{padding:8px 10px;font-size:11px;}
+  .btn-hdr{padding:8px 9px;font-size:11px;}
   .hdr-btns{width:100%;justify-content:space-between;margin-top:2px;}
   .save-st{margin-left:auto;}
 }
@@ -498,6 +498,7 @@ input[type=range]{accent-color:var(--accent);}
   <span class="ev" id="evLabel"></span>
   <span class="save-st" id="saveSt"></span>
   <span class="hdr-btns">
+    <button class="btn-hdr" onclick="printPdf()" title="タイムスケジュールをPDFで保存・印刷">PDF</button>
     <button class="btn-hdr" onclick="downloadSchedule()" title="完成したタイムスケジュールをファイルで保存">ダウンロード</button>
     <button class="btn-hdr" onclick="exportJson()" title="編集できる状態で次の担当者に渡すファイル">引き継ぎの作成</button>
     <label class="btn-hdr" title="引き継ぎファイルを読み込む">読込
@@ -2276,13 +2277,48 @@ tr.over td.t{color:#c0001a}
 .muted{color:#999;font-weight:400}
 .ov{font-size:12px;color:#c0001a;margin-bottom:7px}
 .ft{margin-top:26px;padding-top:12px;border-top:1px solid #eee;font-size:11px;color:#aaa}
-@media print{body{background:#fff;padding:0}.wrap{box-shadow:none;padding:0;max-width:none}}
+@page{size:A4;margin:14mm 12mm}
+@media print{
+  body{background:#fff;padding:0}
+  .wrap{box-shadow:none;padding:0;max-width:none;border-radius:0}
+  h2{break-after:avoid;page-break-after:avoid}
+  table{break-inside:auto}
+  tr{break-inside:avoid;page-break-inside:avoid}
+  tr.g td{background:#f2f2f2!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr.over td{background:#ffecec!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .tag,.tag2{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ft{margin-top:16px}
+}
 </style></head><body><div class="wrap">
 <h1>${esc(title)}</h1>
 <div class="sub">タイムスケジュール</div>
 ${body}
 <div class="ft">作成日 ${new Date().toLocaleDateString('ja-JP')}</div>
 </div></body></html>`;
+}
+
+// PDF出力（ブラウザの印刷経由。日本語もそのまま出ます）
+function printPdf() {
+  const ifr = document.createElement('iframe');
+  ifr.setAttribute('aria-hidden', 'true');
+  ifr.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden;';
+  document.body.appendChild(ifr);
+  const doc = ifr.contentWindow.document;
+  doc.open();
+  doc.write(scheduleHtml());
+  doc.close();
+  setTimeout(() => {
+    try {
+      ifr.contentWindow.focus();
+      ifr.contentWindow.print();
+    } catch (e) {
+      // 印刷が使えない環境では新しいタブで開く
+      const blob = new Blob([scheduleHtml()], { type: 'text/html;charset=utf-8' });
+      window.open(URL.createObjectURL(blob), '_blank');
+    }
+    setTimeout(() => ifr.remove(), 1500);
+  }, 350);
+  toast('印刷画面で「PDFに保存」を選んでください');
 }
 
 function downloadSchedule() {
