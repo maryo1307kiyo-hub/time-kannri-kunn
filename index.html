@@ -2509,7 +2509,8 @@ function scheduleHtml() {
   sched.days.forEach((d, i) => {
     const c = computeDay(i);
     if (!c || !c.items.length) return;
-    body += `<h2>${esc(d.label)}${d.date ? `<span class="dt">${dateShort(d.date)}</span>` : ''}`
+    body += `<section class="day">`
+          + `<h2>${esc(d.label)}${d.date ? `<span class="dt">${dateShort(d.date)}</span>` : ''}`
           + `<span class="tm">${d.startTime}〜${d.endTime}</span></h2>`;
     if (c.overflow) body += `<p class="ov">終了時刻を ${c.totalUsed - c.totalMin}分 超過しています</p>`;
     body += '<table>';
@@ -2524,7 +2525,7 @@ function scheduleHtml() {
             + `<td class="n">${nm}</td>`
             + `<td class="d">${it.effectiveDuration}分</td></tr>`;
     });
-    body += '</table>';
+    body += '</table></section>';
   });
   if (!body) body = '<p class="muted">出演者が登録されていません。</p>';
 
@@ -2541,6 +2542,7 @@ h1{font-size:21px;margin-bottom:3px}
 h2{font-size:14px;margin:26px 0 9px;padding-bottom:6px;border-bottom:2px solid #1a3a6e;
   display:flex;align-items:baseline;gap:9px}
 h2:first-of-type{margin-top:0}
+section.day+section.day{margin-top:8px}
 h2 .dt{font-size:12px;color:#888;font-weight:400}
 h2 .tm{font-size:12px;color:#888;font-weight:400;margin-left:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
@@ -2561,6 +2563,10 @@ tr.over td.t{color:#c0001a}
 @media print{
   body{background:#fff;padding:0}
   .wrap{box-shadow:none;padding:0;max-width:none;border-radius:0}
+  /* 日程ごとに改ページ */
+  section.day{break-before:page;page-break-before:always}
+  section.day:first-of-type{break-before:auto;page-break-before:auto}
+  section.day h2{margin-top:0}
   h2{break-after:avoid;page-break-after:avoid}
   table{break-inside:auto}
   tr{break-inside:avoid;page-break-inside:avoid}
