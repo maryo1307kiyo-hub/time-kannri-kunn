@@ -2476,8 +2476,7 @@ function exportJson() {
   const blob = new Blob([JSON.stringify(sched, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  const name = (sched.eventName || 'タイスケ').replace(/[\\/:*?"<>|]/g, '_');
-  a.download = `${name}_引き継ぎ_${new Date().toISOString().slice(0,10)}.json`;
+  a.download = `${safeFileName(docTitleName())}_引き継ぎ.json`;
   a.click();
   URL.revokeObjectURL(a.href);
   toast('引き継ぎファイルを作成しました');
@@ -2502,6 +2501,22 @@ function importJson(input) {
 }
 
 // ─── タイムスケジュールをファイルで保存 ───
+// イベント名_開催日（yyyy/mm/dd）を作る
+function docTitleName() {
+  const ev = (sched.eventName || 'タイムスケジュール').trim();
+  const dated = sched.days.filter(d => d.date).map(d => d.date).sort();
+  if (!dated.length) return ev;
+  const fmt = iso => `${iso.slice(0,4)}/${iso.slice(5,7)}/${iso.slice(8,10)}`;
+  const head = fmt(dated[0]);
+  // 複数日なら末尾の日付も添える
+  const tail = dated.length > 1 ? `-${dated[dated.length-1].slice(5,7)}/${dated[dated.length-1].slice(8,10)}` : '';
+  return `${ev}_${head}${tail}`;
+}
+// ファイル名として使えない文字を置き換える
+function safeFileName(t) {
+  return t.replace(/[\\/:*?"<>|]/g, '-');
+}
+
 function scheduleHtml() {
   const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const title = sched.eventName || 'タイムスケジュール';
@@ -2531,7 +2546,7 @@ function scheduleHtml() {
 
   return `<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(title)}</title><style>
+<title>${esc(docTitleName())}</title><style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,-apple-system,'Hiragino Sans','Noto Sans JP',sans-serif;
   background:#f4f4f4;color:#1a1a1a;padding:26px 16px;line-height:1.55}
@@ -2611,8 +2626,7 @@ function downloadSchedule() {
   const blob = new Blob([scheduleHtml()], { type: 'text/html;charset=utf-8' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  const name = (sched.eventName || 'タイムスケジュール').replace(/[\\/:*?"<>|]/g, '_');
-  a.download = `${name}_タイムスケジュール.html`;
+  a.download = `${safeFileName(docTitleName())}.html`;
   a.click();
   URL.revokeObjectURL(a.href);
   toast('タイムスケジュールを保存しました（そのまま共有できます）');
