@@ -122,13 +122,95 @@ body.reordering .sidebar{overflow:hidden;}
 .p-item.is-co .p-name{font-size:12.5px;color:#3a3a3a;}
 .p-item.is-co .p-note{color:#9a9a9a;}
 @media (max-width:820px){ .p-item.is-co{margin-left:0;} }
+.pg-addbtn{
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  padding:3px 9px;font-size:10px;font-weight:700;color:var(--accent);cursor:pointer;
+  font-family:inherit;white-space:nowrap;letter-spacing:0;
+}
+.pg-addbtn:hover{background:var(--accent-bg);}
+.ins-here{height:0;overflow:visible;display:flex;justify-content:center;position:relative;z-index:2;}
+.ins-here button{
+  transform:translateY(-8px);opacity:0;transition:opacity .12s;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:2px 10px;font-size:10px;color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap;
+}
+.ins-here:hover button,.ins-here button:focus{opacity:1;border-color:var(--accent);color:var(--accent);}
+@media (max-width:820px){
+  .pg-addbtn{padding:6px 11px;font-size:12px;}
+  .ins-here button{opacity:1;font-size:11px;padding:4px 12px;}
+}
+.pg-add{
+  width:100%!important;border:1px dashed #c4c4c4!important;background:#fff!important;
+  border-radius:4px;padding:4px 7px!important;font-size:11px!important;color:#444;
+}
+.pg-add::placeholder{color:#b4b4b4;}
+.pg-add:focus{border-style:solid!important;border-color:var(--accent)!important;}
+@media (max-width:820px){ .pg-addbtn{
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  padding:3px 9px;font-size:10px;font-weight:700;color:var(--accent);cursor:pointer;
+  font-family:inherit;white-space:nowrap;letter-spacing:0;
+}
+.pg-addbtn:hover{background:var(--accent-bg);}
+.ins-here{height:0;overflow:visible;display:flex;justify-content:center;position:relative;z-index:2;}
+.ins-here button{
+  transform:translateY(-8px);opacity:0;transition:opacity .12s;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:2px 10px;font-size:10px;color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap;
+}
+.ins-here:hover button,.ins-here button:focus{opacity:1;border-color:var(--accent);color:var(--accent);}
+@media (max-width:820px){
+  .pg-addbtn{padding:6px 11px;font-size:12px;}
+  .ins-here button{opacity:1;font-size:11px;padding:4px 12px;}
+}
+.pg-add{font-size:16px!important;padding:8px!important;} }
 .pg-here,.gap-here{
   background:var(--accent);color:#fff;border:none;border-radius:4px;
   padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;
   font-family:inherit;flex-shrink:0;
 }
 .pg-here:hover,.gap-here:hover{background:#8a0013;}
-@media (max-width:820px){ .pg-here,.gap-here{padding:7px 11px;font-size:12px;} }
+@media (max-width:820px){ .pg-addbtn{
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  padding:3px 9px;font-size:10px;font-weight:700;color:var(--accent);cursor:pointer;
+  font-family:inherit;white-space:nowrap;letter-spacing:0;
+}
+.pg-addbtn:hover{background:var(--accent-bg);}
+.ins-here{height:0;overflow:visible;display:flex;justify-content:center;position:relative;z-index:2;}
+.ins-here button{
+  transform:translateY(-8px);opacity:0;transition:opacity .12s;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:2px 10px;font-size:10px;color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap;
+}
+.ins-here:hover button,.ins-here button:focus{opacity:1;border-color:var(--accent);color:var(--accent);}
+@media (max-width:820px){
+  .pg-addbtn{padding:6px 11px;font-size:12px;}
+  .ins-here button{opacity:1;font-size:11px;padding:4px 12px;}
+}
+.pg-add{
+  width:100%!important;border:1px dashed #c4c4c4!important;background:#fff!important;
+  border-radius:4px;padding:4px 7px!important;font-size:11px!important;color:#444;
+}
+.pg-add::placeholder{color:#b4b4b4;}
+.pg-add:focus{border-style:solid!important;border-color:var(--accent)!important;}
+@media (max-width:820px){ .pg-addbtn{
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  padding:3px 9px;font-size:10px;font-weight:700;color:var(--accent);cursor:pointer;
+  font-family:inherit;white-space:nowrap;letter-spacing:0;
+}
+.pg-addbtn:hover{background:var(--accent-bg);}
+.ins-here{height:0;overflow:visible;display:flex;justify-content:center;position:relative;z-index:2;}
+.ins-here button{
+  transform:translateY(-8px);opacity:0;transition:opacity .12s;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:2px 10px;font-size:10px;color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap;
+}
+.ins-here:hover button,.ins-here button:focus{opacity:1;border-color:var(--accent);color:var(--accent);}
+@media (max-width:820px){
+  .pg-addbtn{padding:6px 11px;font-size:12px;}
+  .ins-here button{opacity:1;font-size:11px;padding:4px 12px;}
+}
+.pg-add{font-size:16px!important;padding:8px!important;} }
+.pg-here,.gap-here{padding:7px 11px;font-size:12px;} }
 
 /* 並べ替えボタン */
 .btn-move.mv-ins.act,.btn-move.gmv-ins.act{background:var(--accent);color:#fff;border-color:var(--accent);}
@@ -261,7 +343,11 @@ body.reordering .sidebar{overflow:hidden;}
 .tl-co.has-act .co-act{font-size:11px;font-weight:700;color:#fff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .tl-co.has-act .co-t{font-size:10px;color:rgba(255,255,255,.72);white-space:nowrap;}
 .tl-resize{position:absolute;bottom:0;left:0;right:0;height:10px;cursor:ns-resize;display:flex;align-items:center;justify-content:center;}
-.tl-resize::after{content:'';width:24px;height:2px;background:rgba(255,255,255,.45);border-radius:1px;}
+.tl-resize::after{content:'';width:24px;height:2px;background:rgba(255,255,255,.45);border-radius:1px;transition:width .15s,height .15s,background .15s;}
+.tl-resize.waiting::after{background:rgba(255,255,255,.8);}
+.tl-resize.armed::after{width:46px;height:4px;background:#fff;}
+body.resizing{user-select:none;-webkit-user-select:none;overflow:hidden;}
+body.resizing .main{overflow:hidden;}
 .tl-empty{color:var(--muted);font-size:13px;padding:48px 0;text-align:center;}
 /* 枠超過 */
 .tl-over-zone{
@@ -349,6 +435,32 @@ input[type=range]{accent-color:var(--accent);}
 .btn-del-s:hover{background:var(--bg);color:var(--text);}
 .btn-del-s.danger{border-color:#f0b4bb;color:var(--accent);}
 .btn-del-s.danger:hover{background:var(--accent-bg);}
+.src-tabs{display:flex;border-bottom:1px solid var(--border);}
+.src-tab{
+  flex:1;padding:11px 8px;border:none;background:none;font-family:inherit;
+  font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;
+}
+.src-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.src-pane{display:none;}
+.src-pane.on{display:block;}
+.src-note{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:9px;}
+#pasteArea{
+  width:100%;height:170px;border:1px solid var(--border);border-radius:5px;
+  padding:9px;font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  resize:vertical;margin-bottom:9px;background:var(--bg);outline:none;
+}
+#pasteArea:focus{border-color:var(--accent);background:#fff;}
+#urlStatus{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5;}
+#urlStatus.err{color:var(--accent);}
+.file-pick{
+  display:block;text-align:center;padding:26px 12px;border:2px dashed var(--border);
+  border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);
+}
+.file-pick:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg);}
+@media (max-width:820px){
+  .src-tab{padding:13px 6px;font-size:13px;}
+  #pasteArea{font-size:16px;height:150px;}
+}
 .imp-mode{display:flex;gap:6px;margin-bottom:10px;}
 .imp-mode label{
   flex:1;display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;
@@ -494,7 +606,7 @@ input[type=range]{accent-color:var(--accent);}
 <div class="drop-zone" id="dropZone">
   <div class="drop-card">
         <div class="t1">ここにドロップしてインポート</div>
-    <div class="t2">.xlsx / .xls / .csv</div>
+    <div class="t2">スプレッドシートの書き出し（.csv / .tsv）/ Excel</div>
   </div>
 </div>
 <div class="app-header">
@@ -567,10 +679,7 @@ input[type=range]{accent-color:var(--accent);}
     <div class="stats-box" id="statsBox"></div>
 
     <div class="sec">出演者追加
-      <label style="cursor:pointer">
-        <span class="btn btn-g" style="font-size:11px;padding:3px 9px">Excelインポート</span>
-        <input type="file" id="xlsxInput" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleXlsx(this)">
-      </label>
+      <button class="btn btn-g" style="font-size:11px;padding:4px 10px" onclick="openSrcModal()">スプレッドシートから取り込み</button>
     </div>
     <div class="add-box">
       <div class="field"><label>名前</label>
@@ -582,7 +691,7 @@ input[type=range]{accent-color:var(--accent);}
           <input type="number" id="addDur" placeholder="例: 20" min="1"></div>
       </div>
       <button class="btn btn-p" style="width:100%" onclick="addPerformer()">＋ 追加</button>
-      <div class="hint">Enterでも追加できます / Excelはウィンドウにドラッグ＆ドロップでもOK</div>
+      <div class="hint">Enterでも追加できます / ファイルはウィンドウにドラッグ＆ドロップでもOK</div>
     </div>
 
     <div class="sec">出演者 <span id="pCount" style="font-weight:400;color:var(--muted)">0人</span>
@@ -593,6 +702,40 @@ input[type=range]{accent-color:var(--accent);}
     </div>
     <div id="balanceBar"></div>
     <div class="p-list" id="pList"></div>
+  </div>
+
+  <!-- SOURCE MODAL -->
+  <div class="modal-bg" id="srcModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>スプレッドシートから取り込み</h2>
+        <button class="modal-close" onclick="document.getElementById('srcModal').classList.remove('open')">×</button>
+      </div>
+      <div class="src-tabs" id="srcTabs">
+        <button class="src-tab active" data-t="paste">貼り付け</button>
+        <button class="src-tab" data-t="url">URL</button>
+        <button class="src-tab" data-t="file">ファイル</button>
+      </div>
+      <div class="modal-body">
+        <div class="src-pane on" data-p="paste">
+          <p class="src-note">スプレッドシートで<b>見出し行を含めて</b>範囲を選択してコピーし、下に貼り付けてください。<br>いちばん確実な方法です。</p>
+          <textarea id="pasteArea" placeholder="ここに貼り付け（Ctrl+V / ⌘V）"></textarea>
+          <button class="btn btn-p" style="width:100%" onclick="importFromPaste()">読み込む</button>
+        </div>
+        <div class="src-pane" data-p="url">
+          <p class="src-note">スプレッドシートのURLを貼ってください。<br>共有設定が<b>「リンクを知っている全員」</b>になっている必要があります。</p>
+          <input type="text" id="sheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
+          <div id="urlStatus"></div>
+          <button class="btn btn-p" style="width:100%;margin-top:7px" onclick="importFromUrl()">読み込む</button>
+        </div>
+        <div class="src-pane" data-p="file">
+          <p class="src-note">スプレッドシートを書き出したファイル（.csv / .tsv）や、Excel（.xlsx / .xls）を選べます。<br>ウィンドウにドラッグ＆ドロップでも読み込めます。</p>
+          <label class="file-pick">ファイルを選ぶ
+            <input type="file" id="xlsxInput" accept=".xlsx,.xls,.csv,.tsv" style="display:none" onchange="handleXlsx(this)">
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- IMPORT MODAL -->
@@ -1260,7 +1403,9 @@ function render() {
     hd.className = 'p-group';
     const nMain = c ? c.main.length : 0;
     hd.innerHTML = `<span>${day.label}${day.date ? `（${dateShort(day.date)}）` : ''}</span>`
+                 + `<button class="pg-addbtn" title="この日の最後に出演者を追加">＋ 出演者</button>`
                  + `<span class="pg-n">${nMain}組${c && c.coActs.length ? ` / 転換${c.coActs.length}` : ''}</span>`;
+    hd.querySelector('.pg-addbtn').addEventListener('click', () => addMainToDay(di));
     pl.appendChild(hd);
 
     if (!c || !c.items.length) {
@@ -1329,7 +1474,9 @@ function render() {
         g.innerHTML = `
           <span class="pg-bar"></span>
           <span class="pg-label">転換 ${item.slotIndex + 1}</span>
-          <span class="pg-name"><span class="pg-none">（出演者なし）</span></span>
+          <span class="pg-name">
+            <input class="pg-add" type="text" placeholder="＋ 出演者を入れる（名前を入力）" title="ここに入る転換の出演者名">
+          </span>
           ${moverIsCo ? `<button class="pg-here gmv-here">＋ ここに入れる</button>` : ''}
           <span class="p-move">
             <button class="btn-move gmv-up" title="上の転換枠と入れ替え"${item.slotIndex<=0?' disabled':''}>▲</button>
@@ -1342,6 +1489,15 @@ function render() {
         g.querySelector('.pg-inp').addEventListener('change', e => {
           setGapDur(item.afterId, Math.max(0, parseInt(e.target.value) || 0));
         });
+        const addInp = g.querySelector('.pg-add');
+        addInp.addEventListener('pointerdown', e => e.stopPropagation());
+        const doAdd = () => {
+          const nm = addInp.value.trim();
+          if (!nm) return;
+          addChangeoverAt(nm, di, item.slotIndex, item.effectiveDuration);
+        };
+        addInp.addEventListener('keydown', e => { if (e.key === 'Enter') doAdd(); });
+        addInp.addEventListener('blur', doAdd);
         const gu = g.querySelector('.gmv-up'), gd = g.querySelector('.gmv-dn');
         if (gu) gu.addEventListener('click', () => swapGap(di, item.slotIndex, item.slotIndex - 1));
         if (gd) gd.addEventListener('click', () => swapGap(di, item.slotIndex, item.slotIndex + 1));
@@ -1363,6 +1519,14 @@ function render() {
       div.innerHTML = cardHtml(p, gi);
       bindCard(div, p, gi);
       pl.appendChild(div);
+
+      // この人の前に差し込むボタン
+      const ib = document.createElement('div');
+      ib.className = 'ins-here';
+      ib.innerHTML = `<button title="${p.name} の前に出演者を追加">＋ ここに出演者を追加</button>`;
+      ib.querySelector('button').addEventListener('click', () => addMainBefore(p.id, di));
+      pl.insertBefore(ib, div);
+
       if (laneOK(item)) lastLaneId = p.id;
     });
 
@@ -1612,71 +1776,90 @@ function renderTimeline(c) {
     blocks.appendChild(el);
   }
 
-  // resize drag（マウス／タッチ両対応）
+  // resize drag（マウスは即時／指は長押ししてから）
   const pointY = ev => ev.touches ? ev.touches[0].clientY : ev.clientY;
+  const RESIZE_HOLD = 280;   // 指の長押し判定
+  const RESIZE_TOL  = 10;    // これ以上ずれたらスクロールとみなす
 
-  const startDrag = e => {
-    const handle = e.target.closest('.tl-resize');
-    if (!handle) return;
-    const sy = pointY(e);
-
+  const beginResize = (handle, sy) => {
     // 空の転換枠
     if (handle.classList.contains('gap-resize')) {
       const afterId = handle.dataset.after;
       const gap = c.items.find(it => it.kind === 'gap' && it.afterId === afterId);
       const orig = gap ? gap.effectiveDuration : sched.changeoverMinutes;
-      const mv = ev => {
-        let nv = Math.max(0, Math.round(orig + (pointY(ev) - sy) / PPM));
+      return v => {
+        let nv = Math.max(0, Math.round(orig + v / PPM));
         nv = Math.min(nv, coCap());
         if (!sched.gapDur) sched.gapDur = {};
         sched.gapDur[afterId] = nv;
         render();
-        ev.preventDefault();
       };
-      const up = () => {
-        document.removeEventListener('mousemove', mv);
-        document.removeEventListener('mouseup', up);
-        document.removeEventListener('touchmove', mv);
-        document.removeEventListener('touchend', up);
-        saveAndRender();
-      };
-      document.addEventListener('mousemove', mv);
-      document.addEventListener('mouseup', up);
-      document.addEventListener('touchmove', mv, { passive: false });
-      document.addEventListener('touchend', up);
-      e.preventDefault();
-      return;
     }
-
-    // 出演者ブロック
     const gi = parseInt(handle.dataset.gi);
-    const pid = sched.performers[gi].id;
+    const pid = sched.performers[gi] && sched.performers[gi].id;
     const item = c.items.find(it => it.kind === 'gap' ? (it.act && it.act.id === pid) : it.id === pid);
     const origDur = item ? item.effectiveDuration : MIN_DUR;
-
-    const mv = ev => {
-      let nv = Math.max(MIN_DUR, Math.round(origDur + (pointY(ev) - sy) / PPM));
+    return v => {
+      let nv = Math.max(MIN_DUR, Math.round(origDur + v / PPM));
       if (sched.performers[gi].type === 'changeover') nv = Math.min(nv, coCap());
       sched.performers[gi].duration = nv;
       render();
+    };
+  };
+
+  const startDrag = e => {
+    const handle = e.target.closest('.tl-resize');
+    if (!handle) return;
+    const isTouch = !!e.touches;
+    const sy = pointY(e);
+    const apply = beginResize(handle, sy);
+    let armed = !isTouch;          // マウスはすぐ／指は長押し後
+    let timer = null;
+
+    if (isTouch) {
+      handle.classList.add('waiting');
+      timer = setTimeout(() => {
+        armed = true;
+        handle.classList.remove('waiting');
+        handle.classList.add('armed');
+        document.body.classList.add('resizing');
+        if (navigator.vibrate) navigator.vibrate(12);
+      }, RESIZE_HOLD);
+    }
+
+    const mv = ev => {
+      const dy = pointY(ev) - sy;
+      if (!armed) {
+        // 長押し前に動いたら中止（ページのスクロールを優先）
+        if (Math.abs(dy) > RESIZE_TOL) finish(false);
+        return;
+      }
+      apply(dy);
       ev.preventDefault();
     };
-    const up = () => {
+    const finish = commit => {
+      if (timer) clearTimeout(timer);
+      handle.classList.remove('waiting', 'armed');
+      document.body.classList.remove('resizing');
       document.removeEventListener('mousemove', mv);
       document.removeEventListener('mouseup', up);
       document.removeEventListener('touchmove', mv);
       document.removeEventListener('touchend', up);
-      saveAndRender();
+      document.removeEventListener('touchcancel', up);
+      if (commit) saveAndRender();
     };
+    const up = () => finish(armed);
+
     document.addEventListener('mousemove', mv);
     document.addEventListener('mouseup', up);
     document.addEventListener('touchmove', mv, { passive: false });
     document.addEventListener('touchend', up);
-    e.preventDefault();
+    document.addEventListener('touchcancel', up);
+    if (!isTouch) e.preventDefault();
   };
 
   blocks.addEventListener('mousedown', startDrag);
-  blocks.addEventListener('touchstart', startDrag, { passive: false });
+  blocks.addEventListener('touchstart', startDrag, { passive: true });
 }
 
 // ─── 転換枠の操作（空の枠も対象）───
@@ -1925,6 +2108,44 @@ function bindCard(div, p, gi, opts) {
 }
 
 // ─── ACTIONS ───
+// 指定した転換枠に、新しい出演者を作って入れる
+function addChangeoverAt(name, dayIdx, slotIndex, dur) {
+  lockSlots(dayIdx);
+  sched.performers.push({
+    id: uid(), name, duration: dur ?? sched.changeoverMinutes,
+    day: dayIdx, note: '', type: 'changeover', flexible: false,
+    allDays: false, slot: slotIndex
+  });
+  saveAndRender();
+  toast(`${name} を ${sched.days[dayIdx].label} の転換 ${slotIndex + 1} に追加しました`);
+}
+
+// その日の最後に本編を追加
+function addMainToDay(dayIdx) {
+  const name = prompt('追加する出演者の名前');
+  if (!name || !name.trim()) return;
+  sched.performers.push({
+    id: uid(), name: name.trim(), duration: null, day: dayIdx,
+    note: '', type: 'main', flexible: false, allDays: false, slot: null
+  });
+  currentDay = dayIdx;
+  saveAndRender();
+}
+
+// 指定の位置に本編の出演者を差し込む
+function addMainBefore(anchorId, dayIdx) {
+  const name = prompt('追加する出演者の名前');
+  if (!name || !name.trim()) return;
+  const np = {
+    id: uid(), name: name.trim(), duration: null, day: dayIdx,
+    note: '', type: 'main', flexible: false, allDays: false, slot: null
+  };
+  const ai = sched.performers.findIndex(x => x.id === anchorId);
+  if (ai < 0) sched.performers.push(np);
+  else sched.performers.splice(ai, 0, np);
+  saveAndRender();
+}
+
 // 2人が「同じ列（同じ種類・同じ日）」に属するか
 function sameLane(a, b) {
   if ((a.type || 'main') !== (b.type || 'main')) return false;
@@ -2024,8 +2245,8 @@ function handleXlsx(input) {
 }
 
 function parseFile(file) {
-  if (!/\.(xlsx|xls|csv)$/i.test(file.name)) {
-    alert('Excel（.xlsx / .xls）または .csv ファイルをドロップしてください');
+  if (!/\.(xlsx|xls|csv|tsv)$/i.test(file.name)) {
+    alert('スプレッドシートの書き出し（.csv / .tsv）か Excel（.xlsx / .xls）を選んでください');
     return;
   }
   const reader = new FileReader();
@@ -2033,97 +2254,153 @@ function parseFile(file) {
     try {
       const wb = XLSX.read(e.target.result, { type: 'array' });
       const ws = wb.Sheets[wb.SheetNames[0]];
-      const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
-      if (rows.length < 2) { alert('データが見つかりませんでした'); return; }
-      const headers = rows[0].map(h => String(h));
-      const nameCol = headers.findIndex(h => h.includes('出演名'));
-      const noteCol = headers.findIndex(h => h.includes('希望時間') || h.includes('希望日'));
-      const perfCol = headers.findIndex(h => h.includes('パフォーマンス内容') || h.includes('パフォーマンス') || h.includes('演目') || h.includes('出演内容'));
-      if (nameCol < 0) { alert('「出演名」列が見つかりませんでした'); return; }
-
-      const dataRows = rows.slice(1).filter(r => r[nameCol] && String(r[nameCol]).trim());
-
-      // ヘッダー行から開催日程を検出
-      detectedEvent = detectEventDates(headers);
-      if (!detectedEvent.dates.length) detectedEvent = null;
-
-      const anyDateSet = sched.days.some(d => d.date);
-      ordinalMap = anyDateSet ? null : buildOrdinalMap(dataRows.map(r => noteCol>=0 ? String(r[noteCol]) : ''));
-
-      importCandidates = dataRows
-        .map(r => {
-          const note = noteCol>=0 ? String(r[noteCol]).trim() : '';
-          const det = detectDay(note);
-          return {
-            name: String(r[nameCol]).trim(),
-            note,
-            skip: false,
-            day: det.day ?? 0,
-            uncertain: det.day === null || det.uncertain,
-            anyday: !!det.anyday,
-            flexible: !!det.anyday || det.day === null,
-            reason: det.reason || '',
-            type: detectChangeover(r, perfCol, nameCol) ? 'changeover' : 'main'
-          };
-        });
-
-      if (!importCandidates.length) { alert('有効なデータがありませんでした'); return; }
-      const existing = sched.performers.map(p => p.name);
-      const dupes = importMode === 'append'
-        ? importCandidates.filter(c => existing.includes(c.name))
-        : [];
-      renderImportPreview();
-      const nUnc = importCandidates.filter(c=>c.uncertain).length;
-      const nCo = importCandidates.filter(c=>c.type==='changeover').length;
-      const warnNoDate = !anyDateSet
-        ? `<div style="color:var(--accent);font-weight:600;margin-bottom:4px">日程に日付が未設定です。「開催日程」で日付（10/3・10/4など）を入れると判定精度が上がります。</div>`
-        : '';
-      document.getElementById('importMsg').innerHTML = warnNoDate +
-        `${importCandidates.length}件を検出。日程は自動判定済みです`
-        + (nUnc ? `（うち<b>${nUnc}件は要確認</b>）` : '')
-        + (nCo ? ` / 転換パフォーマンス <b>${nCo}件</b>（${perfCol>=0?'パフォーマンス内容':'出演名'}欄に「転換」）` : '')
-        + `。プルダウンで修正できます。`;
-      const warn = document.getElementById('importWarn');
-      if (dupes.length) { warn.style.display=''; warn.textContent=`重複: ${dupes.map(d=>d.name).join('、')}`; }
-      else warn.style.display='none';
-      // 検出した開催日程のバナー
-      const db2 = document.getElementById('detectBanner');
-      if (detectedEvent) {
-        const ds = detectedEvent.dates.map(d => `${d.month}/${d.day}`).join('・');
-        const ts = detectedEvent.startTime ? `${detectedEvent.startTime}〜${detectedEvent.endTime}` : '時刻未検出';
-        db2.innerHTML = `
-          <div class="detect-banner">
-            <span class="dt">Excelから開催日程を検出<br><b>${ds}</b> / ${ts}（${detectedEvent.dates.length}日間）</span>
-            <button class="btn-detect" id="applyDatesBtn">設定に反映</button>
-          </div>`;
-        document.getElementById('applyDatesBtn').addEventListener('click', () => {
-          applyDetectedDates(detectedEvent);
-          // 日付が入ったので判定をやり直す
-          ordinalMap = null;
-          importCandidates.forEach(c => {
-            const det = detectDay(c.note);
-            c.day = det.day ?? 0;
-            c.uncertain = det.day === null || det.uncertain;
-            c.anyday = !!det.anyday;
-            c.flexible = !!det.anyday || det.day === null;
-            c.reason = det.reason || '';
-          });
-          db2.innerHTML = `<div class="detect-banner"><span class="dt">開催日程を設定しました。日程の判定をやり直しました。</span></div>`;
-          document.getElementById('importWarn').style.display = 'none';
-          renderImportPreview();
-          render();
-        });
-      } else db2.innerHTML = '';
-
-      importMode = 'replace';
-      const rr = document.querySelector('#impMode input[value="replace"]');
-      if (rr) rr.checked = true;
-      document.querySelectorAll('#impMode label').forEach(l => l.classList.toggle('sel', l.dataset.mode === 'replace'));
-      renderImportPreview();
-      document.getElementById('importModal').classList.add('open');
+      processRows(XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' }), 'ファイル');
     } catch(err) { alert('読み込み失敗: ' + err.message); }
   };
   reader.readAsArrayBuffer(file);
+}
+
+// ── スプレッドシートのURLから読み込む ──
+function sheetUrlCandidates(url) {
+  const m = String(url).match(/\/spreadsheets\/d\/(?:e\/)?([a-zA-Z0-9-_]+)/);
+  if (!m) return [];
+  const id = m[1];
+  const gid = (String(url).match(/[#&?]gid=(\d+)/) || [])[1] || '0';
+  const pubs = /\/spreadsheets\/d\/e\//.test(url);
+  if (pubs) return [
+    `https://docs.google.com/spreadsheets/d/e/${id}/pub?gid=${gid}&single=true&output=csv`
+  ];
+  return [
+    `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&gid=${gid}`,
+    `https://docs.google.com/spreadsheets/d/${id}/export?format=csv&gid=${gid}`,
+    `https://docs.google.com/spreadsheets/d/${id}/pub?gid=${gid}&single=true&output=csv`
+  ];
+}
+
+async function importFromUrl() {
+  const url = document.getElementById('sheetUrl').value.trim();
+  if (!url) { document.getElementById('sheetUrl').focus(); return; }
+  const urls = sheetUrlCandidates(url);
+  if (!urls.length) { alert('GoogleスプレッドシートのURLを貼ってください'); return; }
+  const st = document.getElementById('urlStatus');
+  st.textContent = '読み込み中…'; st.className = 'url-st';
+  for (const u of urls) {
+    try {
+      const res = await fetch(u);
+      if (!res.ok) continue;
+      const text = await res.text();
+      if (/^\s*</.test(text)) continue;             // ログイン画面などのHTMLが返った
+      const wb = XLSX.read(text, { type: 'string' });
+      const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: '' });
+      st.textContent = ''; 
+      processRows(rows, 'スプレッドシート');
+      return;
+    } catch(e) { /* 次の候補へ */ }
+  }
+  st.className = 'url-st err';
+  st.innerHTML = '読み込めませんでした。共有設定が「リンクを知っている全員」になっているか確認してください。'
+               + '<br>うまくいかない場合は「貼り付け」タブが確実です。';
+}
+
+// ── セルをそのまま貼り付けて読み込む ──
+function importFromPaste() {
+  const txt = document.getElementById('pasteArea').value;
+  if (!txt.trim()) { document.getElementById('pasteArea').focus(); return; }
+  try {
+    const sep = txt.indexOf('\t') >= 0 ? '\t' : ',';
+    const wb = XLSX.read(txt, { type: 'string', FS: sep });
+    const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: '' });
+    processRows(rows, '貼り付け');
+  } catch(err) { alert('読み込み失敗: ' + err.message); }
+}
+
+// ── 取り込み共通処理 ──
+function processRows(rows, srcLabel) {
+  rows = (rows || []).filter(r => r && r.some(c => String(c).trim()));
+  if (rows.length < 2) { alert('データが見つかりませんでした'); return; }
+
+  const headers = rows[0].map(h => String(h));
+  const nameCol = headers.findIndex(h => h.includes('出演名') || h.includes('アーティスト名') || h.includes('バンド名'));
+  const noteCol = headers.findIndex(h => h.includes('希望時間') || h.includes('希望日'));
+  const perfCol = headers.findIndex(h => h.includes('パフォーマンス内容') || h.includes('パフォーマンス') || h.includes('演目') || h.includes('出演内容'));
+  if (nameCol < 0) { alert('「出演名」の列が見つかりませんでした。1行目を見出し行にしてください。'); return; }
+
+  const dataRows = rows.slice(1).filter(r => r[nameCol] && String(r[nameCol]).trim());
+
+  detectedEvent = detectEventDates(headers);
+  if (!detectedEvent.dates.length) detectedEvent = null;
+
+  const anyDateSet = sched.days.some(d => d.date);
+  ordinalMap = anyDateSet ? null : buildOrdinalMap(dataRows.map(r => noteCol>=0 ? String(r[noteCol]) : ''));
+
+  importCandidates = dataRows.map(r => {
+    const note = noteCol>=0 ? String(r[noteCol]).trim() : '';
+    const det = detectDay(note);
+    return {
+      name: String(r[nameCol]).trim(),
+      note, skip: false,
+      day: det.day ?? 0,
+      uncertain: det.day === null || det.uncertain,
+      anyday: !!det.anyday,
+      flexible: !!det.anyday || det.day === null,
+      reason: det.reason || '',
+      type: detectChangeover(r, perfCol, nameCol) ? 'changeover' : 'main'
+    };
+  });
+  if (!importCandidates.length) { alert('有効なデータがありませんでした'); return; }
+
+  importMode = 'replace';
+  const rr = document.querySelector('#impMode input[value="replace"]');
+  if (rr) rr.checked = true;
+  document.querySelectorAll('#impMode label').forEach(l => l.classList.toggle('sel', l.dataset.mode === 'replace'));
+
+  const existing = sched.performers.map(p => p.name);
+  const dupes = importMode === 'append' ? importCandidates.filter(c => existing.includes(c.name)) : [];
+
+  renderImportPreview();
+  const nUnc = importCandidates.filter(c=>c.uncertain).length;
+  const nCo  = importCandidates.filter(c=>c.type==='changeover').length;
+  const warnNoDate = !anyDateSet
+    ? `<div style="color:var(--accent);font-weight:600;margin-bottom:4px">日程に日付が未設定です。「開催日程」で日付（10/3・10/4など）を入れると判定精度が上がります。</div>`
+    : '';
+  document.getElementById('importMsg').innerHTML = warnNoDate +
+    `${srcLabel}から ${importCandidates.length}件を読み込みました。日程は自動判定済みです`
+    + (nUnc ? `（うち<b>${nUnc}件は要確認</b>）` : '')
+    + (nCo ? ` / 転換 <b>${nCo}件</b>` : '')
+    + `。プルダウンで修正できます。`;
+  const warn = document.getElementById('importWarn');
+  if (dupes.length) { warn.style.display=''; warn.textContent=`重複: ${dupes.map(d=>d.name).join('、')}`; }
+  else warn.style.display='none';
+
+  const db2 = document.getElementById('detectBanner');
+  if (detectedEvent) {
+    const ds = detectedEvent.dates.map(d => `${d.month}/${d.day}`).join('・');
+    const ts = detectedEvent.startTime ? `${detectedEvent.startTime}〜${detectedEvent.endTime}` : '時刻未検出';
+    db2.innerHTML = `
+      <div class="detect-banner">
+        <span class="dt">開催日程を検出<br><b>${ds}</b> / ${ts}（${detectedEvent.dates.length}日間）</span>
+        <button class="btn-detect" id="applyDatesBtn">設定に反映</button>
+      </div>`;
+    document.getElementById('applyDatesBtn').addEventListener('click', () => {
+      applyDetectedDates(detectedEvent);
+      ordinalMap = null;
+      importCandidates.forEach(c => {
+        const det = detectDay(c.note);
+        c.day = det.day ?? 0;
+        c.uncertain = det.day === null || det.uncertain;
+        c.anyday = !!det.anyday;
+        c.flexible = !!det.anyday || det.day === null;
+        c.reason = det.reason || '';
+      });
+      db2.innerHTML = `<div class="detect-banner"><span class="dt">開催日程を設定しました。日程の判定をやり直しました。</span></div>`;
+      document.getElementById('importWarn').style.display = 'none';
+      renderImportPreview();
+      render();
+    });
+  } else db2.innerHTML = '';
+
+  document.getElementById('srcModal')?.classList.remove('open');
+  document.getElementById('importModal').classList.add('open');
 }
 
 function renderImportPreview() {
