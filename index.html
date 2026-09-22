@@ -2612,6 +2612,19 @@ function downloadSchedule() {
   toast('タイムスケジュールを保存しました（そのまま共有できます）');
 }
 
+// ─── 取り込み元モーダル ───
+function openSrcModal() {
+  document.getElementById('srcModal').classList.add('open');
+  document.getElementById('urlStatus').textContent = '';
+  setTimeout(() => document.getElementById('pasteArea').focus(), 60);
+}
+document.getElementById('srcTabs').addEventListener('click', e => {
+  const b = e.target.closest('.src-tab');
+  if (!b) return;
+  document.querySelectorAll('.src-tab').forEach(x => x.classList.toggle('active', x === b));
+  document.querySelectorAll('.src-pane').forEach(x => x.classList.toggle('on', x.dataset.p === b.dataset.t));
+});
+
 // ─── インポートモード切替 ───
 document.getElementById('impMode').addEventListener('change', e => {
   importMode = e.target.value;
